@@ -2,10 +2,22 @@ package ejercicio1;
 
 public class Dni{
 
-	public static boolean validarDni(String dni) throws DniInvalidoException
+	public static boolean verificarDniInvalido(String dni) throws DniInvalidoException
 	
 	{
-		return false;
+		Boolean auxLetras = false;
+		for(int i=0;i<dni.length();i++)
+		{
+			if(!Character.isDigit(dni.charAt(i)))
+			{
+				auxLetras = true;
+			}
+			if(auxLetras)
+			{
+				throw new DniInvalidoException();
+			}
+		}
+		return auxLetras;
 	}
 	
 	
