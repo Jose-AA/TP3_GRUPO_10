@@ -8,11 +8,12 @@ public class Dni{
 		Boolean auxLetras = false;
 		for(int i=0;i<dni.length();i++)
 		{
+			//pregunto si el caracter es un dígito
 			if(!Character.isDigit(dni.charAt(i)))
 			{
 				auxLetras = true;
 			}
-			if(auxLetras)
+			if(auxLetras)//si se encontró una letra en el dni se arroja la exception
 			{
 				throw new DniInvalidoException();
 			}
