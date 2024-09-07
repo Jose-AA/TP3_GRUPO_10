@@ -39,8 +39,23 @@ public class Archivo {
             	 if (!linea.isEmpty()) { // Ignorar líneas vacías
                      try {
                     	 
-                         personas.add(Persona.fromString(linea));
+                    	 String[] parts = linea.split("-");
                          
+                         // Validar el formato
+                         if (parts.length != 3) {
+                             throw new IllegalArgumentException();
+                         }
+
+                         // Validar el DNI
+                         String dni = parts[2];
+                         if (Dni.verificarDniInvalido(dni)) {
+                             throw new DniInvalidoException();
+                         }
+
+                         Persona persona = new Persona(parts[1], parts[0], Integer.parseInt(dni));
+                         personas.add(persona);
+                     } catch (DniInvalidoException e) {
+                         System.err.println("DNI inválido en línea: " + linea);
                      } catch (IllegalArgumentException e) {
                          System.err.println("Línea mal formateada: " + linea);
                      }

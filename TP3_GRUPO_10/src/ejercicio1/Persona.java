@@ -45,12 +45,12 @@ public class Persona implements Comparable {
 	public String toString() {
 		return "Apellido = " + apellido + ", nombre = " + nombre + ", dni = " + dni;
 	}
-
+/*
 	public static Persona fromString(String str) {
 		String[] parts = str.split("-");
         return new Persona(parts[1], parts[0], Integer.parseInt(parts[2]));
     }
-
+*/
 	@Override
 	public int compareTo(Object o) {
 		
