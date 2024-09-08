@@ -16,12 +16,22 @@ public class Archivo {
         this.ruta = ruta;
     }
 
+    public Archivo() {
+    	this.ruta = null;
+    }
+    
     public void setRuta(String ruta) {
     	this.ruta = ruta;
     }
     
     public boolean crearArchivo() {
     	FileWriter escritura;
+    	
+    	if(this.ruta == null) {
+    		System.out.println("Error, no se ha asignado una ruta");
+    		return false;
+    	}
+    	
     	try {
     		escritura = new FileWriter(this.ruta, true);
     		escritura.write("");
@@ -37,8 +47,15 @@ public class Archivo {
     
     public TreeSet<Persona> leerPersonas() {
         TreeSet<Persona> personas = new TreeSet<>();
+        
+    	if(this.ruta == null) {
+    		System.out.println("Error, no se ha asignado una ruta");
+    		return personas;
+    	}
+        
+        
         try {
-            FileReader entrada = new FileReader(ruta);
+            FileReader entrada = new FileReader(this.ruta);
             BufferedReader miBuffer = new BufferedReader(entrada);
             String linea = miBuffer.readLine(); // Leer la primera línea
             while (linea != null) {
@@ -80,12 +97,16 @@ public class Archivo {
     
     public void escribe_linea(TreeSet<Persona> listaPersonas) {
     	
-		
+       	if(this.ruta == null) {
+    		System.out.println("Error, no se ha asignado una ruta");
+    		return;
+    	}
+    	
     	Archivo archivo = new Archivo(this.ruta);
     	archivo.crearArchivo();
     	
 		try {
-			FileWriter entrada = new FileWriter(ruta, true);
+			FileWriter entrada = new FileWriter(this.ruta, true);
 			BufferedWriter buffer = new BufferedWriter(entrada);
 			
 			Iterator it = listaPersonas.iterator();
