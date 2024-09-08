@@ -1,9 +1,11 @@
 package ejercicio1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Archivo {
@@ -14,10 +16,14 @@ public class Archivo {
         this.ruta = ruta;
     }
 
-    public boolean crearArchivo(String ruta) {
+    public void setRuta(String ruta) {
+    	this.ruta = ruta;
+    }
+    
+    public boolean crearArchivo() {
     	FileWriter escritura;
     	try {
-    		escritura = new FileWriter(ruta, true);
+    		escritura = new FileWriter(this.ruta, true);
     		escritura.write("");
     		escritura.close();
     		return true;
@@ -69,5 +75,35 @@ public class Archivo {
             e.printStackTrace();
         }
         return personas;
+    }
+    
+    
+    public void escribe_linea(TreeSet<Persona> listaPersonas) {
+    	
+		
+    	Archivo archivo = new Archivo(this.ruta);
+    	archivo.crearArchivo();
+    	
+		try {
+			FileWriter entrada = new FileWriter(ruta, true);
+			BufferedWriter buffer = new BufferedWriter(entrada);
+			
+			Iterator it = listaPersonas.iterator();
+			
+			while(it.hasNext()) {
+				Persona p = (Persona) it.next();
+				
+				buffer.write(p.toString());
+				buffer.newLine();
+				
+			}
+			
+			buffer.close();
+			entrada.close();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
     }
 }
