@@ -43,7 +43,7 @@ public class Persona implements Comparable {
 
 	@Override
 	public String toString() {
-		return "Apellido = " + apellido + ", nombre = " + nombre + ", dni = " + dni;
+		return this.apellido + "-" + this.nombre + "-" + this.dni;
 	}
 /*
 	public static Persona fromString(String str) {
